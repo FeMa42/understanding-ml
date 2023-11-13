@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Understanding Machine Learning Methods &#8212; Understanding Machine Learning Methods</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'README';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/AuxMe_300.png" class="logo__image only-light" alt="Understanding Machine Learning Methods - Home"/>
+    <script>document.write(`<img src="_static/AuxMe_300.png" class="logo__image only-dark" alt="Understanding Machine Learning Methods - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Understanding Machine Learning Methods
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FeMa42/understandin-ml" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FeMa42/understandin-ml/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Understanding Machine Learning Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-diffusion-and-score-based-generative-models">Understanding Diffusion and Score-Based Generative Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-reinforcement-learning">Understanding Reinforcement Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-based-reinforcement-learning">Model-Based Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-reinforcement-learning">Offline Reinforcement Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-numerical-methods">Understanding Numerical Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contact">Contact</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="understanding-machine-learning-methods">
+<h1>Understanding Machine Learning Methods<a class="headerlink" href="#understanding-machine-learning-methods" title="Permalink to this heading">#</a></h1>
+<p>This is a repository for my notes and various resources, specifically focusing on machine learning. My primary interest lies in exploring and elucidating areas such as Generative Models and Reinforcement Learning.</p>
+<section id="understanding-diffusion-and-score-based-generative-models">
+<h2>Understanding Diffusion and Score-Based Generative Models<a class="headerlink" href="#understanding-diffusion-and-score-based-generative-models" title="Permalink to this heading">#</a></h2>
+<p>I wrote a small introduction into <a class="reference external" href="https://fema42.github.io/intro_to_diffusion/intro.html">Score-Based and Denoising Diffusion Models</a>. The introduction is written in the form of a jupyter book and based on great resources like:</p>
+<ul class="simple">
+<li><p><strong>Diffusion-Denoising Models:</strong> For a very good introduction into diffusion models you can check out the blog post from Lilian Weng: <a class="reference external" href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">Diffusion-Denoising Models</a>. She also has a great blog posts on a variety of other topics in machine learning. I can highly recommend checking out her blog: <a class="reference external" href="https://lilianweng.github.io/lil-log/">Lilian Weng’s Blog</a></p></li>
+<li><p><strong>Score-Based Generative Models</strong> A good introduction is given by Yang Song: <a class="reference external" href="https://yang-song.net/blog/2021/score/">Score-Based Generative Models</a>. There is also a <a class="reference external" href="https://www.youtube.com/watch?v=wMmqCMwuM2Q">great talk on Youtube</a> by Yang Song on Diffusion and Score-Based Generative Models.</p></li>
+<li><p>CVPR 2022 Tutorial on <a class="reference external" href="https://cvpr2022-tutorial-diffusion-models.github.io/">Denoising Diffusion-based Generative Modeling - Foundations and Applications</a></p></li>
+</ul>
+</section>
+<section id="understanding-reinforcement-learning">
+<h2>Understanding Reinforcement Learning<a class="headerlink" href="#understanding-reinforcement-learning" title="Permalink to this heading">#</a></h2>
+<p>I have not jet written an introduction into reinforcement learning (RL). However, I list some resources that I found helpful.</p>
+<p>Reinforcement Learning (RL) considers sequential decision making problems in a Markov decision processes (MDP). With States <span class="math notranslate nohighlight">\(s \in S\)</span>, actions <span class="math notranslate nohighlight">\(a \in A\)</span>, transition dynamics <span class="math notranslate nohighlight">\(p(s_{t+1}|s_t,a_t)\)</span>, reward <span class="math notranslate nohighlight">\(r(s_t,a_t)\)</span> and if applicable a horizon <span class="math notranslate nohighlight">\(T\)</span>. A indepth introduction into MDPs is given in <a class="reference external" href="https://www.andrew.cmu.edu/course/10-703/textbook/BartoSutton.pdf">Reinforcement Learning - An Introduction</a> by Richard S. Sutton and Andrew G. Barto.</p>
+<p>For a more practice oriented introduction into RL i can recomment the following websites:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://spinningup.openai.com/en/latest/">Welcome to Spinning Up in Deep RL! — Spinning Up documentation</a></p></li>
+<li><p><a class="reference external" href="https://huggingface.co/learn/deep-rl-course/en/unit0/introduction">Welcome to the 🤗 Deep Reinforcement Learning Course - Hugging Face Deep RL Course</a></p></li>
+</ul>
+<p>It is also worth checking out different repositories to understanding the implementation of RL algorithms. For example <a class="reference external" href="https://github.com/vwxyzjn/cleanrl">CleanRL (Clean Implementation of RL Algorithms)</a> is doing a great job in providing a clean implementation of RL algorithms. Another great repository is <a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/">Stable-Baselines</a> which implements many RL algorithms in PyTorch that are proven to work well.</p>
+<p><strong>Blog Post on debugging RL:</strong></p>
+<p>Debugging RL can be very hard (and frustrating sometimes). I found the following blog post very helpful (and actually also very entertaining): <a class="reference external" href="https://www.alexirpan.com/2018/02/14/rl-hard.html">Deep Reinforcement Learning Doesn’t Work Yet</a>. Note that the article is from 2018 but I find many points are still valid today and the article is a great read. Another great article on debugging RL is: <a class="reference external" href="https://andyljones.com/posts/rl-debugging.html">Debugging Reinforcement Learning Systems</a></p>
+<p><strong>Lecture on RL</strong>
+If you want an even more in-depth introduction into RL, I can recommend the following lecture on RL: <a class="reference external" href="https://rail.eecs.berkeley.edu/deeprlcourse/">CS 285 at UC Berkeley</a></p>
+<section id="model-based-reinforcement-learning">
+<h3>Model-Based Reinforcement Learning<a class="headerlink" href="#model-based-reinforcement-learning" title="Permalink to this heading">#</a></h3>
+<p>Model-based reinforcement learning (MBRL) also considers sequential decision making problems in a Markov decision processes. With States <span class="math notranslate nohighlight">\(s \in S\)</span>, actions <span class="math notranslate nohighlight">\(a \in A\)</span>, transition dynamics <span class="math notranslate nohighlight">\(p(s_{t+1}|s_t,a_t)\)</span>, reward <span class="math notranslate nohighlight">\(r(s_t,a_t)\)</span> and if applicable horizon <span class="math notranslate nohighlight">\(T\)</span>. Contrary to model free RL we consider having or learning a <em>dynamics model</em>, to reason about the world. The dynamics model usually models the environment transition dynamics <span class="math notranslate nohighlight">\(s_{t+1}=f_{\psi}(s_t,a_t)\)</span>. Hence, the agent can use this dynamics model to decide how to act by predicting the future. Note that the true dynamics are often considered stochastic (that is why we have written <span class="math notranslate nohighlight">\(p(\dot)\)</span> above). We can therefore also learn/use a stochastic model of our Environment.</p>
+<p>If the model is learnable, the agent can collect more data to improve the model. How the agent uses the model to decide which action to take is based on its approach to planning. The agent can also learn a policy to predict actions (similar to model free RL approaches) to improve its planning based on experiences. Similarly other estimates like inverse dynamics models (mapping from states to actions) or reward models (predicting rewards) can be useful in this framework. One example to planning is <a class="reference external" href="https://en.wikipedia.org/wiki/Model_predictive_control">model-predictive control (MPC)</a>. Where the method optimizes the expected reward by searching the best actions. The actions are sampled for example using a uniformly distributed set, represented as <span class="math notranslate nohighlight">\(U(a)\)</span>.</p>
+<p>You can read more on model-based RL in a blog on <a class="reference external" href="https://www.natolambert.com/writing/debugging-mbrl">Debugging Deep Model-based Reinforcement Learning Systems</a> and a recent survey on <a class="reference external" href="https://arxiv.org/abs/2006.16712">Model-based Reinforcement Learning: A Survey</a>.</p>
+</section>
+<section id="imitation-learning">
+<h3>Imitation Learning<a class="headerlink" href="#imitation-learning" title="Permalink to this heading">#</a></h3>
+<p>Imitation learning (IL) describes methods that learn optimal behavior that is represented by a collection of expert demonstrations. In IL, the agent also interacts with an environment in a sequential decision making process and therefore methods from RL can help to effektively solve IL problems. However, different to the RL-setting, does the agent not receive a reward from the environment. Instead, IL assumes that the experience comes from an expert policy (which behaves perfectly considering the task).<br />
+Therefore, IL can alleviate the problem of designing effective reward functions. This is particularly useful for tasks where demonstrations are more accessible than designing a reward function. One example is to <a class="reference external" href="https://ieeexplore.ieee.org/document/9669229">train traffic agents in a simulation to mimic real-world road users</a>. In this case, it is easier to collect demonstrations of real-world road users than to design a reward function that captures all aspects of the task. A great overview of Imitation Learning Methods is given in <a class="reference external" href="https://arxiv.org/abs/1811.06711">“An Algorithmic Perspective on Imitation Learning”</a>. A recent Imitation Learning method is <a class="reference external" href="http://ai.stanford.edu/blog/learning-to-imitate/#inverse-q-learning-iq-learn">IQ-Learn</a> which is based on soft Q-Learning and learns a Q-function using the demonstration data. The authors showed that there is a one-to-one mapping between the learned Q-function and the underlying reward function and they can sucessfully estimate an reward based on the learned Q-function. We developed a method which does not require actions to be available in the expert data and can be used with state-only demonstrations. The method is called <a class="reference external" href="https://arxiv.org/abs/2202.04332">Imitation Learning by State-Only Distribution Matching</a> and uses an expert and environment models to capture the reward function. Another great resource is the repository of <a class="reference external" href="https://github.com/illidanlab/opolo-code">OPOLO: Off-policy Learning from Observations</a> which implements many IL methods.</p>
+</section>
+<section id="offline-reinforcement-learning">
+<h3>Offline Reinforcement Learning<a class="headerlink" href="#offline-reinforcement-learning" title="Permalink to this heading">#</a></h3>
+<p>Similar to RL is Offline Reinforcement Learning (Offline RL) a type of RL in which the agent learns from a dataset of previously collected experiences. However in Offline RL the agent learns without interacting with the environment during training. This makes it different from online RL, in which the agent learns while interacting with the environment. In IL both is possible while methods that rely on online interaction generally perform better. While offline RL and imitation learning rely on a dataset of experiences to learn from, they are not the same. While Imitation Learning <span class="math notranslate nohighlight">\((s_t, a_t, s_{t+1},)\)</span> assumes that the experience comes from an expert policy (which behaves perfectly considering the task), Offline RL assumes that the experiences come from any policy and often the dataset contains also the Reward of the Environment <span class="math notranslate nohighlight">\((s_t, a_t, s_{t+1}, r_t)\)</span>. So while these methods seem very similar the application of either method should be considered based on the task and availability of the data. For example imitation learning is better suited for the task of learning traffic agents to behave like real-world road users. The reason is that every recorded roas user is by definition an “expert on human driving”. However, if the task is to learn to drive a car as safe as possible, then offline RL is probably better suited. The reason is that the dataset of human driving behavior is not necessarily optimal for the task of driving as safe as possible. There is a good article discussing this topic: <a class="reference external" href="https://bair.berkeley.edu/blog/2022/04/25/rl-or-bc/">Should I Use Offline RL or Imitation Learning?</a>. Using Offline RL can help to learn a policy that might be profient in a task before it is deployed in the real-world, where it might be dangerous to learn a policy online. A good overview on Offline RL is given in <a class="reference external" href="https://arxiv.org/abs/2005.01643">“Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems”</a>. Sergey Levin and Aviral Kumar gave a great tutorial at <a class="reference external" href="https://sites.google.com/view/offlinerltutorial-neurips2020/home">NeurIPS 2020</a> on Offline RL.</p>
+</section>
+</section>
+<section id="understanding-numerical-methods">
+<h2>Understanding Numerical Methods<a class="headerlink" href="#understanding-numerical-methods" title="Permalink to this heading">#</a></h2>
+<p>I held the exercises for the course “Numerical Methods for Engineers” at the University of Augsburg, Germany. The exercises are in the Julia programming language. I’ve made a <a class="reference external" href="https://fema42.github.io/numerical_methods/intro.html">jupyter book</a> out of the exercises and the exercises itself are availale at: <a class="reference external" href="https://github.com/FeMa42/auxme_numerik.git">Numerical Methods for Engineers</a> as Jupyter notebooks (partly written in German) with julia code. Many of my exerrcise are based on the great book <a class="reference external" href="https://tobydriscoll.net/fnc-julia/home.html">Fundamentals of Numerical Computation</a> by Toby A. Driscoll and Richard J. Braun.</p>
+</section>
+<section id="contact">
+<h2>Contact<a class="headerlink" href="#contact" title="Permalink to this heading">#</a></h2>
+<p>I am a PhD student at the University of Augsburg, Germany. I am part of the <a class="reference external" href="https://www.uni-augsburg.de/de/fakultaet/fai/informatik/prof/imech/team/damian-boborzi/">Chair of Mechatronics</a> at the Faculty of Applied Computer Science. My research interests lie in the field of machine learning, specifically in the areas of generative models and reinforcement learning.</p>
+<p>If you have any questions or comments, feel free to reach out to me via <span class="xref myst">mail</span>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-diffusion-and-score-based-generative-models">Understanding Diffusion and Score-Based Generative Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-reinforcement-learning">Understanding Reinforcement Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-based-reinforcement-learning">Model-Based Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imitation-learning">Imitation Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offline-reinforcement-learning">Offline Reinforcement Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-numerical-methods">Understanding Numerical Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contact">Contact</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Damian Boborzi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
