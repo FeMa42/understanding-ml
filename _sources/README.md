@@ -12,6 +12,8 @@ A great general resource on Machine Learning is the Book by Kevin P. Murphy "Pro
 
 - **Huggingface:** The [Huggingface](https://huggingface.co/) website is a great resource for machine learning in general. They provide many pretrained models and tutorials on how to use them. Especially if you are interested in state-of-the-art models which are expensive to train like transformer or diffusion models. They also provide a great [course](https://huggingface.co/course/chapter1) on natural language processing. Their interface is very easy to use and with a few lines of code you can read and generate text or images.
 
+- **Visualization:** If you are using python I can recommend the [Scientific Visualization Book](https://github.com/rougier/scientific-visualization-book) and the [Matplotlib Cheatsheet](https://github.com/matplotlib/cheatsheets). If you are interested in the visualization of machine learning models, I can recommend the [Distill](https://distill.pub/) website. They have great articles on machine learning and visualization of these models and concepts.
+
 ## Understanding Diffusion and Score-Based Generative Models
 
 Ever wondered how Diffusion and Score-Based Generative Models work? Check out my beginner-friendly guide on [Score-Based and Denoising Diffusion Models](https://fema42.github.io/intro_to_diffusion/intro.html), where I break it down using Jupyter books. This introduction is inspired by amazing resources such as:
