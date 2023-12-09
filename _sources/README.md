@@ -2,6 +2,16 @@
 
 Welcome to my digital playground where I explore the world of machine learning. Join me as I delve into my favorite areas like Generative Models and Reinforcement Learning. I will share some of my notes and resources that I found helpful. I hope you find them useful as well.
 
+## Basics of Machine Learning and General Resources
+
+A great general resource on Machine Learning is the Book by Kevin P. Murphy "Probabilistic Machine Learning an Introduction". The book is available online: [Probabilistic Machine Learning an Introduction](https://probml.github.io/pml-book/book1.html). The accompanying [Github](https://github.com/probml/pyprobml) is also worth checking. For example are there lists of practical resources like python tutorials: [ProbML Tutorials](https://github.com/probml/pyprobml/tree/master/notebooks/tutorials), [ProbML Python Tutorials](https://github.com/probml/pyprobml/blob/master/notebooks/tutorials/python_tutorials.md). The code used for making the figures is also available on [github](https://github.com/probml/pyprobml/tree/master/notebooks/book1). The second book goes more into detail on more advanced topics and is also available online: [Probabilistic Machine Learning an Introduction](https://probml.github.io/pml-book/book2.html). There are many other great resources on machine learning. I list some others I liked and think are woth notig below.
+
+- **Computer Vision:** If you are interested in **computer vision** and convolutional neural networks I can recommend the lecture notes of the Stanford Computer Vision Course [CS231n](https://cs231n.github.io).
+
+- **Transformer:** [Andrej Kaparthy](https://karpathy.ai) made a nice and very hands on introduction on natural language processing starting very general with backpropagation and building its way up to transformers: [Neural Networks: Zero to Hero](https://karpathy.ai/zero-to-hero.html), with the youtube [playlist](https://www.youtube.com/watch?v=VMj-3S1tku0&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&index=1&t=0s).
+
+- **Huggingface:** The [Huggingface](https://huggingface.co/) website is a great resource for machine learning in general. They provide many pretrained models and tutorials on how to use them. Especially if you are interested in state-of-the-art models which are expensive to train like transformer or diffusion models. They also provide a great [course](https://huggingface.co/course/chapter1) on natural language processing. Their interface is very easy to use and with a few lines of code you can read and generate text or images.
+
 ## Understanding Diffusion and Score-Based Generative Models
 
 Ever wondered how Diffusion and Score-Based Generative Models work? Check out my beginner-friendly guide on [Score-Based and Denoising Diffusion Models](https://fema42.github.io/intro_to_diffusion/intro.html), where I break it down using Jupyter books. This introduction is inspired by amazing resources such as:
